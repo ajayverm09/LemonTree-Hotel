@@ -37,21 +37,23 @@ const OffersSection = () => {
   };
 
   return (
-    <section className="py-16 px-4 md:px-20 text-center bg-gray-100">
+    <section className="py-12 sm:py-16 px-4 sm:px-6 md:px-12 lg:px-20 text-center bg-gray-100">
       <div className="container mx-auto">
-        <h2 className="text-4xl font-bold mb-8 text-gray-800 relative inline-block">
-          OFFERS
-          <span className="absolute bottom-0 left-0 w-full h-1 bg-yellow-500 transform scale-x-0 transition-transform duration-300 origin-bottom-right group-hover:scale-x-100 group-hover:origin-bottom-left"></span>
-        </h2>
+        <div className="group mb-8 sm:mb-12">
+          <h2 className="text-3xl sm:text-4xl font-bold text-gray-800 relative inline-block">
+            OFFERS
+            <span className="absolute bottom-0 left-0 w-full h-1 bg-yellow-500 transform scale-x-0 transition-transform duration-300 origin-bottom-right group-hover:scale-x-100 group-hover:origin-bottom-left"></span>
+          </h2>
+        </div>
         
         {/* Card Container */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
           {offers.map((offer) => (
             <article 
               key={offer.id} 
-              className="bg-white rounded-lg shadow-lg overflow-hidden transform transition-all duration-300 hover:scale-105 hover:shadow-xl group"
+              className="bg-white rounded-lg shadow-md sm:shadow-lg overflow-hidden transform transition-all duration-300 hover:scale-105 hover:shadow-xl group"
             >
-              <div className="relative h-64 overflow-hidden">
+              <div className="relative h-48 sm:h-56 md:h-64 overflow-hidden">
                 {/* Loading State */}
                 {!imageLoaded[offer.id] && !imageError[offer.id] && (
                   <div className="absolute inset-0 flex items-center justify-center bg-gray-200">
@@ -68,33 +70,35 @@ const OffersSection = () => {
                   <img
                     src={offer.imageSrc}
                     alt={offer.imageAlt}
-                    className={`w-full h-full transition-transform duration-500 group-hover:scale-110 ${imageLoaded[offer.id] ? 'opacity-100' : 'opacity-0'}`}
+                    className={`w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 ${imageLoaded[offer.id] ? 'opacity-100' : 'opacity-0'}`}
                     onLoad={() => handleImageLoad(offer.id)}
                     onError={() => handleImageError(offer.id)}
                   />
                 )}
               </div>
               
-              {/* Text Content and Button Side by Side */}
-              <div className="p-6 flex justify-between items-center">
-                <h3 className="text-xl font-semibold text-gray-800">{offer.title}</h3>
-                
-                <a
-                  href={offer.link}
-                  className="inline-flex items-center text-yellow-600 font-semibold hover:text-yellow-700 transition-colors duration-200 group"
-                  aria-label={`Explore more about ${offer.title}`}
-                >
-                  Explore More
-                  <svg 
-                    xmlns="http://www.w3.org/2000/svg" 
-                    className="h-4 w-4 ml-2 transform transition-transform duration-200 group-hover:translate-x-1" 
-                    fill="none" 
-                    viewBox="0 0 24 24" 
-                    stroke="currentColor"
+              {/* Text Content and Button - Responsive Layout */}
+              <div className="p-4 sm:p-6">
+                <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3">
+                  <h3 className="text-lg sm:text-xl font-semibold text-gray-800 text-center sm:text-left">{offer.title}</h3>
+                  
+                  <a
+                    href={offer.link}
+                    className="inline-flex items-center justify-center text-yellow-600 font-semibold hover:text-yellow-700 transition-colors duration-200 group"
+                    aria-label={`Explore more about ${offer.title}`}
                   >
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                  </svg>
-                </a>
+                    <span className="text-sm sm:text-base">Explore More</span>
+                    <svg 
+                      xmlns="http://www.w3.org/2000/svg" 
+                      className="h-4 w-4 ml-1 sm:ml-2 transform transition-transform duration-200 group-hover:translate-x-1" 
+                      fill="none" 
+                      viewBox="0 0 24 24" 
+                      stroke="currentColor"
+                    >
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                    </svg>
+                  </a>
+                </div>
               </div>
             </article>
           ))}

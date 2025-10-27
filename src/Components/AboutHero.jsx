@@ -30,9 +30,9 @@ const AboutHero = () => {
           </div>
           
           <div className="mt-10">
-            <button className="bg-white text-gray-900 hover:bg-gray-100 font-bold py-3 px-8 rounded-full transition-all duration-300 transform hover:scale-105 hover:shadow-lg">
+            <a href='/blogs' className="bg-white text-gray-900 border border-gray-900 hover:bg-gray-900 hover:text-white font-bold py-3 px-8 rounded-full transition-all duration-300 transform hover:scale-105 hover:shadow-lg">
               Explore Our Hotels
-            </button>
+            </a>
           </div>
         </div>
       </div>

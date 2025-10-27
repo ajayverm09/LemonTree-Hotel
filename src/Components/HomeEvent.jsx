@@ -28,7 +28,7 @@ const EventsAndConferences = () => {
         </h2>
       </div>
 
-      <div className="md:flex md:flex-row flex flex-col items-center justify-center gap-8">
+      <div className=" md:flex-row flex flex-col items-center justify-center gap-8">
         {events.map((event, index) => (
           <div
             key={index}

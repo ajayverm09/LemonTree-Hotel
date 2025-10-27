@@ -1,8 +1,10 @@
-import React from "react";
-import { Facebook, Instagram, Twitter, X, Youtube, Mail, Phone, MapPin, Clock, CreditCard, Wifi, Car } from "lucide-react";
+import React, { useState } from "react";
+import { Facebook, Instagram, Twitter, X, Youtube, Mail, Phone, MapPin, Clock, CreditCard, Wifi, Car, ChevronDown, ChevronUp } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const Footer = () => {
+  const [openDropdown, setOpenDropdown] = useState(null);
+  
   const quickLinks = [
     { name: "Home", url: "/" },
     { name: "About Us", url: "/about" },
@@ -32,6 +34,10 @@ const Footer = () => {
     { Icon: Clock, label: "24/7 Service" },
     { Icon: CreditCard, label: "Payment Options" }
   ];
+
+  const toggleDropdown = (dropdown) => {
+    setOpenDropdown(openDropdown === dropdown ? null : dropdown);
+  };
 
   return (
     <footer className="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white font-sans py-12 rounded-t-3xl shadow-2xl w-full relative overflow-hidden">
@@ -91,8 +97,8 @@ const Footer = () => {
           </div>
         </div>
 
-        {/* Main Content Section */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 pb-8 mb-8">
+        {/* Main Content Section - Desktop View */}
+        <div className="hidden md:grid grid-cols-2 lg:grid-cols-4 gap-8 pb-8 mb-8">
           {/* Quick Links */}
           <div>
             <h3 className="font-bold text-lg mb-4 text-sky-400">Quick Links</h3>
@@ -170,19 +176,140 @@ const Footer = () => {
           </div>
         </div>
 
+        {/* Mobile View - Dropdown Menus */}
+        <div className="md:hidden pb-8 mb-8">
+          {/* Quick Links Dropdown */}
+          <div className="mb-4">
+            <button
+              onClick={() => toggleDropdown('quickLinks')}
+              className="flex justify-between items-center w-full py-3 px-4 bg-slate-800/50 rounded-lg text-left"
+            >
+              <h3 className="font-bold text-lg text-sky-400">Quick Links</h3>
+              {openDropdown === 'quickLinks' ? 
+                <ChevronUp size={20} className="text-sky-400" /> : 
+                <ChevronDown size={20} className="text-sky-400" />
+              }
+            </button>
+            {openDropdown === 'quickLinks' && (
+              <ul className="mt-2 ml-4 space-y-2">
+                {quickLinks.map((link, index) => (
+                  <li key={index}>
+                    <Link
+                      to={link.url}
+                      className="text-sm text-slate-300 hover:text-sky-400 transition-all duration-300 block py-1"
+                    >
+                      {link.name}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
+
+          {/* Services Dropdown */}
+          <div className="mb-4">
+            <button
+              onClick={() => toggleDropdown('services')}
+              className="flex justify-between items-center w-full py-3 px-4 bg-slate-800/50 rounded-lg text-left"
+            >
+              <h3 className="font-bold text-lg text-sky-400">Our Services</h3>
+              {openDropdown === 'services' ? 
+                <ChevronUp size={20} className="text-sky-400" /> : 
+                <ChevronDown size={20} className="text-sky-400" />
+              }
+            </button>
+            {openDropdown === 'services' && (
+              <ul className="mt-2 ml-4 space-y-2">
+                {services.map((service, index) => (
+                  <li key={index}>
+                    <Link
+                      to={service.url}
+                      className="text-sm text-slate-300 hover:text-sky-400 transition-all duration-300 block py-1"
+                    >
+                      {service.name}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
+
+          {/* Contact Dropdown */}
+          <div className="mb-4">
+            <button
+              onClick={() => toggleDropdown('contact')}
+              className="flex justify-between items-center w-full py-3 px-4 bg-slate-800/50 rounded-lg text-left"
+            >
+              <h3 className="font-bold text-lg text-sky-400">Contact Us</h3>
+              {openDropdown === 'contact' ? 
+                <ChevronUp size={20} className="text-sky-400" /> : 
+                <ChevronDown size={20} className="text-sky-400" />
+              }
+            </button>
+            {openDropdown === 'contact' && (
+              <div className="mt-2 ml-4 space-y-3 text-sm">
+                <div className="flex items-start group">
+                  <div className="p-2 rounded-full bg-slate-800 mr-3 group-hover:bg-sky-600 transition-colors duration-300 mt-0.5">
+                    <MapPin size={16} className="text-slate-400 group-hover:text-white transition-colors duration-300" />
+                  </div>
+                  <span className="text-slate-300 group-hover:text-white transition-colors">123 Catering Street, Hyderabad</span>
+                </div>
+                <div className="flex items-center group">
+                  <div className="p-2 rounded-full bg-slate-800 mr-3 group-hover:bg-sky-600 transition-colors duration-300">
+                    <Phone size={16} className="text-slate-400 group-hover:text-white transition-colors duration-300" />
+                  </div>
+                  <span className="text-slate-300 group-hover:text-white transition-colors">+91 98765 43210</span>
+                </div>
+                <div className="flex items-center group">
+                  <div className="p-2 rounded-full bg-slate-800 mr-3 group-hover:bg-sky-600 transition-colors duration-300">
+                    <Mail size={16} className="text-slate-400 group-hover:text-white transition-colors duration-300" />
+                  </div>
+                  <span className="text-slate-300 group-hover:text-white transition-colors">info@lemontree.com</span>
+                </div>
+              </div>
+            )}
+          </div>
+
+          {/* Amenities Dropdown */}
+          <div className="">
+            <button
+              onClick={() => toggleDropdown('amenities')}
+              className="flex justify-between items-center w-full py-3 px-4 bg-slate-800/50 rounded-lg text-left"
+            >
+              <h3 className="font-bold text-lg text-sky-400">Hotel Amenities</h3>
+              {openDropdown === 'amenities' ? 
+                <ChevronUp size={20} className="text-sky-400" /> : 
+                <ChevronDown size={20} className="text-sky-400" />
+              }
+            </button>
+            {openDropdown === 'amenities' && (
+              <div className="mt-2 ml-4 grid grid-cols-2 gap-3">
+                {amenities.map(({ Icon, label }, index) => (
+                  <div key={index} className="flex items-center group">
+                    <div className="p-2 rounded-full bg-slate-800 mr-2 group-hover:bg-sky-600 transition-colors duration-300">
+                      <Icon size={16} className="text-slate-400 group-hover:text-white transition-colors duration-300" />
+                    </div>
+                    <span className="text-sm text-slate-300 group-hover:text-white transition-colors">{label}</span>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        </div>
+
         {/* Social Media and Copyright Section */}
-        <div className="flex flex-col md:flex-row justify-between items-center pt-6 mt-8 border-t border-slate-700">
+        <div className="flex flex-col md:flex-row justify-between items-center pt-5 border-t border-slate-700">
           {/* Social Media Icons */}
           <div className="flex items-center mb-4 md:mb-0">
             <p className="font-medium text-sm mr-4 tracking-wider uppercase text-sky-400">
               FOLLOW US
             </p>
-            <div className="flex space-x-3">
+            <div className="flex md:space-x-3">
               {socialIcons.map(({ Icon, url, label }, index) => (
                 <a
                   key={index}
                   href={url}
-                  className="bg-slate-800 text-white w-10 h-10 flex items-center justify-center text-lg rounded-full hover:bg-gradient-to-r hover:from-sky-500 hover:to-blue-600 transition-all duration-300 shadow-md hover:shadow-xl transform hover:-translate-y-1 group"
+                  className="bg-slate-800 text-white ml-1 w-10 h-10 flex items-center justify-center text-lg rounded-full hover:bg-gradient-to-r hover:from-sky-500 hover:to-blue-600 transition-all duration-300 shadow-md hover:shadow-xl transform hover:-translate-y-1 group"
                   aria-label={`Follow us on ${label}`}
                   title={label}
                 >

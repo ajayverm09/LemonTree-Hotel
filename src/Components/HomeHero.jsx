@@ -28,13 +28,27 @@ const HeroSection = ({
   };
 
   return (
-    <section className="relative w-full h-screen overflow-hidden" aria-labelledby="hero-title">
+    <section 
+      className={`relative w-full overflow-hidden ${
+        isMobile ? 'h-[70vh]' : 'h-screen'
+      }`} 
+      aria-labelledby="hero-title"
+    >
       {/* Background Image */}
       <div className="absolute inset-0 z-0">
         <img
           src={isMobile ? mobileImage : desktopImage}
           alt="Lemon Tree Hotels - Luxury accommodation"
-          className={`object-cover w-full h-full transition-opacity duration-500 ${imageLoaded ? 'opacity-100' : 'opacity-0'}`}
+          className={`w-full h-full transition-opacity duration-500 ${
+            imageLoaded ? 'opacity-100' : 'opacity-0'
+          } ${
+            isMobile 
+              ? 'object-cover object-center' 
+              : 'object-cover'
+          }`}
+          style={{
+            objectPosition: isMobile ? 'center' : 'center'
+          }}
           onLoad={handleImageLoad}
           loading="eager"
           decoding="async"
@@ -52,29 +66,32 @@ const HeroSection = ({
       ></div>
 
       {/* Hero Content */}
-      <div className="relative z-20 flex flex-col justify-center items-center h-full px-4 text-center md:pt-72">
-        <div className={`${isMobile ? 'mt-auto mb-12' : 'mt-0'}`}>
-          <h1 id="hero-title" className="text-3xl md:text-5xl font-bold text-white mb-4">
+      <div className={`relative z-20 flex flex-col justify-center items-center px-4 text-center ${
+        isMobile ? 'h-full py-8' : 'h-full md:pt-72'
+      }`}>
+        <div className={`${isMobile ? 'mb-8' : 'mt-0'}`}>
+          <h1 id="hero-title" className={`font-bold md:mt-10 mt-50 text-white mb-4 ${
+            isMobile ? 'text-2xl' : 'text-3xl md:text-5xl'
+          }`}>
             {title}
           </h1>
           
-          {isMobile && (
-            <p className="text-lg text-white mb-6 max-w-md mx-auto">
-              {subtitle}
-            </p>
-          )}
-          
-          {/* Show subtitle on desktop as well */}
-          {!isMobile && (
-            <p className="text-xl text-white mb-8 max-w-2xl mx-auto">
-              {subtitle}
-            </p>
-          )}
+          <p className={`text-white mb-6 ${
+            isMobile 
+              ? 'text-base max-w-sm mx-auto' 
+              : 'text-lg md:text-xl max-w-2xl mx-auto mb-8'
+          }`}>
+            {subtitle}
+          </p>
           
           <div className="flex flex-col md:flex-row gap-4 justify-center">
             <a
               href="/contact"
-              className="inline-block px-8 py-3 bg-[#3394BB] text-white font-semibold border border-[#3394BB] rounded-full hover:text-[#12a8e3] hover:bg-white focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 transition duration-300 transform hover:scale-105"
+              className={`inline-block font-semibold border border-[#3394BB] rounded-full hover:text-[#12a8e3] hover:bg-white focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 transition duration-300 transform hover:scale-105 ${
+                isMobile 
+                  ? 'px-6 py-2 text-sm bg-[#3394BB] text-white' 
+                  : 'px-8 py-3 bg-[#3394BB] text-white'
+              }`}
               aria-label="Book your stay at Lemon Tree Hotels"
             >
               Book Now
