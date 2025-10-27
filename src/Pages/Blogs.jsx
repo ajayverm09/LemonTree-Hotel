@@ -53,7 +53,7 @@ const Blogs = () => {
   return (
     <div className="min-h-screen overflow-hidden bg-gray-50">
       {/* Hero Section with Background Image */}
-      <section className="relative bg-cover bg-center h-[70vh] bg-no-repeat text-white py-20 md:py-32 overflow-hidden" 
+      <section className="relative bg-cover bg-center md:h-[70vh] bg-no-repeat text-white py-20 md:py-32 overflow-hidden" 
                style={{ backgroundImage: "url('https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80')" }}>
         {/* Overlay for text readability */}
         <div className="absolute inset-0 bg-gradient-to-r from-[#3394BB]/80 to-[#12a8e3]/80"></div>
